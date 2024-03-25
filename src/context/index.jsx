@@ -8,7 +8,22 @@ export default function GlobalState({ children }) {
   const [loading, setLoading] = useState(false);
   const [recipeList, setRecipeList] = useState([]);
   const [recipeDetailsData, setRecipeDetailsData] = useState(null);
+  const [favoritesList, setFavoritesList] = useState([]);
 
+
+  const handleAddToFavorite = (getcurrentItem)=>{
+    console.log(getcurrentItem);
+    let cpyFavoritesList = [...favoritesList];
+    const index = cpyFavoritesList.findIndex(item => item.id ===getcurrentItem.id)
+
+    if (index === -1) {
+        cpyFavoritesList.push(getcurrentItem);
+    }else{
+        cpyFavoritesList.splice(index);
+    }
+    setFavoritesList(cpyFavoritesList);
+  }
+  console.log('favourites List',favoritesList);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -37,6 +52,9 @@ export default function GlobalState({ children }) {
         recipeList,
         recipeDetailsData,
         setRecipeDetailsData,
+        favoritesList,
+        setFavoritesList,
+        handleAddToFavorite
       }}
     >
       {children}

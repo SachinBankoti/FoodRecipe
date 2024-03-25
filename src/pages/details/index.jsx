@@ -4,7 +4,7 @@ import { GlobalContext } from '../../context';
 
 const Details = () => {
   const {id} = useParams();//getting the API
-  const {recipeDetailsData,setRecipeDetailsData} = useContext(GlobalContext);
+  const {recipeDetailsData,setRecipeDetailsData,handleAddToFavorite,favoritesList} = useContext(GlobalContext);
 
   useEffect(()=>{
     async function getRecipeDetails(){
@@ -22,7 +22,7 @@ const Details = () => {
     <div className="row-start-2 lg:row-start-auto">
       <div className="h-96 overflow-hidden rounded-xl group">
         <img
-          src={recipeDetailsData?.recipe?.image_url}
+          src={recipeDetailsData?.recipe?.image_url} alt='recipe'
           className="w-full h-full object-cover block group-hover:scale-105 duration-300"
         />
       </div>
@@ -35,7 +35,7 @@ const Details = () => {
         {recipeDetailsData?.recipe?.title}
       </h3>
       <div>
-        {/* <button
+        <button
           onClick={() => handleAddToFavorite(recipeDetailsData?.recipe)}
           className="p-3 px-8 rounded-lg text-sm uppercase font-medium tracking-wider mt-3 inline-block shadow-md bg-black text-white"
         >
@@ -44,7 +44,7 @@ const Details = () => {
           ) !== -1
             ? "Remove from favorites"
             : "Add to favorites"}
-        </button> */}
+        </button>
       </div>
       <div>
         <span className="text-2xl font-semibold text-black">
